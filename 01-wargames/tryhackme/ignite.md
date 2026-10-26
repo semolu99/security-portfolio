@@ -26,12 +26,15 @@
     ```
     - 열린 포트는 `80/tcp`로 `http`이며 `Apache httpd 2.4.18`
 2. 추가적으로 정보를 얻기 위해 웹 서비스 접근
+    ![웹 서비스 접근](./images/ignite/0-homepage.png)
     홈페이지에서 얻을 수 있는 정보는 다음과 같다.
     1. `Fuel CMS version 1.4`
     2. `php` 사용
     3. `database.php`의 위치
     4. admin 계정과 비밀번호
 3. `/fuel`로 이동
+    ![`/fuel`로 이동](./images/ignite/1-homepage-fuel.png)
+    ![어드민 계정으로 접근 성공](./images/ignite/2-homepage-fuel-login.png)
     어드민 계정으로 접근 성공
     별 다른 수확은 없었음
 
@@ -133,9 +136,50 @@ root
 1. `find / -name "*.txt" 2>/dev/null`: 필요한 파일에 접근
 
 ## 6. 보고서 (Report)
-| 발견 사항 | 위험도 | 조치 권고 |
-|---|---|---|
-| `CVE-2018-16763` |  `CVSS 3.x` 기준 `9.88(critical)`<br>`CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` | 최신 패치 버전으로 업그레이드<br>불 가능할 경우<br>1. 네트워크 수준의 방어 (WAF 룰 적용)<br>2. 관리자 페이지(fuel) 접근 제어<br>3. PHP 환경 설정 강화 (`php.ini`) |
+> `CVE-2018-16763`
+
+### 요약 (Summary)
+| 항목 | 내용 |
+|------|------|
+| 제품 / 영향 버전 | `Fuel CMS` / `1.4.1` 이하 |
+| 영향 개요 | 인증 없이 PHP 서버에서 임의 명령을 실행할 수 있는 RCE |
+| 관련 CWE | [CWE-74](https://cwe.mitre.org/data/definitions/74.html) (OS Command Injection) |
+| CVSS | `3.1` 기준 `9.8 (Critical)` — `AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
+| 공개일 / 패치 버전 | 2018-09-12 / `1.4.1` 이후 패치 버전 |
+
+### 원인 (Root Cause)
+`fuel/pages/select` 컨트롤러의 `filter` 파라미터가 사용자 입력을 검증 없이 `preg_replace()`의 `/e` 수정자(modifier)로 전달함.
+`/e` 수정자는 매칭된 문자열을 PHP 코드로 그대로 평가(eval) 하는 레거시 기능이라, 공격자가 만든 입력이 정규식 치환 결과가 아니라 실행 가능한 PHP 코드로 처리됨.
+
+### 악용 조건 (Conditions)
+- 인증 불필요 (익스플로잇 당시 admin 로그인 여부와 무관하게 동작)
+- `/fuel/pages/select/?filter=` 엔드포인트가 외부에 노출되어 있어야 함
+
+### 공격 흐름 (Attack Flow)
+1. `searchsploit`로 `Fuel CMS 1.4.1 RCE` 공개 익스플로잇 확인
+2. `exploit2.rb` 실행 → `filter` 파라미터에 `preg_replace` eval 페이로드를 담아 전송, 임의 명령(`ls -al`) 실행 성공 확인
+3. 단발성 명령 실행을 안정적인 쉘로 바꾸기 위해 리버스쉘(`mkfifo` + `nc`) 페이로드를 같은 경로로 전송
+4. 공격자 PC `nc` 리스너에 연결 성공, `whoami` 결과 `root` 확인 (Ignite는 웹서버가 root 권한으로 동작하는 환경이라 권한 상승 없이 바로 root 획득)
+
+### 영향 (Impact)
+웹 애플리케이션 계층을 거치지 않고 OS 명령을 직접 실행할 수 있어, 서버 전체 장악(파일 열람/변조, 추가 공격의 발판)으로 이어짐.
+이번 환경에서는 웹서버 프로세스가 root로 동작해 피해 범위가 시스템 전체로 확장됨.
+
+### 대응 방안 (Remediation)
+- Fuel CMS 최신 버전으로 업그레이드 (가장 확실한 조치)
+- 패치 불가 시 임시 조치
+  1. 네트워크 수준 방어 (WAF 룰로 `filter` 파라미터의 PHP 코드 패턴 차단)
+  2. 관리자 페이지(`/fuel`) 접근을 IP 화이트리스트 등으로 제한
+  3. PHP 설정 강화
+    - 가능하면 `preg_replace`의 `/e` 수정자 사용 금지
+  4. 웹서버를 root가 아닌 저권한 계정으로 구동
+
+### 본인 평가 (Assessment)
+- RCE 자체도 치명적이지만, 웹서버 프로세스 권한 설정 미흡(root 구동)이 "권한 상승 단계 없이 바로 root 탈취"로 이어진 추가 요인
+- 실제 운영 환경이라면 RCE 패치뿐 아니라 프로세스 권한 분리 또한 필요하다는 지점을 확인
+
+### 참고 (References)
+[NVD - CVE-2018-16763](https://nvd.nist.gov/vuln/detail/CVE-2018-16763)
 
 ## 7. 사용 도구/명령어 정리 (Tools & Commands)
 ### `nmap`
