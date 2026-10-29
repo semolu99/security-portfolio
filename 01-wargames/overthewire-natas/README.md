@@ -13,6 +13,9 @@
 | Level | 주제 | 핵심 개념/도구 |
 |-------|------|----------------|
 | [0 → 2](./level00-02.md) | 소스 확인 | `F12`, `View Page Source` |
+| [2 → 3](./level02-03.md) | 디렉토리 리스팅 | `/files`, Directory Listing |
+| [3 → 4](./level03-04.md) | robots.txt | `/robots.txt` |
+| [4 → 5](./level04-05.md) | Referer 변조 | `Referer`, `Burp Suite` |
 | ... | | |
 
 > 레벨 문서는 풀이 + 보고서로 구성된 파일로 작성.
