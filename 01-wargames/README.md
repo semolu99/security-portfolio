@@ -4,7 +4,7 @@
 | Name | 주제 | 진행률 |
 |-------|------|-------------|
 | [bandit](./overthewire-bandit) | `Linux` | `██████████` 100% (34/34) |
-| [natas](./overthewire-natas) | `Web` | `█░░░░░░░░░` 6% (2/34) |
+| [natas](./overthewire-natas) | `Web` | `██░░░░░░░░` 18% (6/34) |
 | [tryhackme](./tryhackme) | `Pentest` | `██████████` 100% (1/1) |
 
 > 진행률은 풀이 문서를 작성한 레벨 기준

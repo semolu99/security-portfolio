@@ -16,6 +16,7 @@
 | [2 → 3](./level02-03.md) | 디렉토리 리스팅 | `/files`, Directory Listing |
 | [3 → 4](./level03-04.md) | robots.txt | `/robots.txt` |
 | [4 → 5](./level04-05.md) | Referer 변조 | `Referer`, `Burp Suite` |
+| [5 → 6](./level05-06.md) | 쿠키 변조 | `Cookie`, `Storage` |
 | ... | | |
 
 > 레벨 문서는 풀이 + 보고서로 구성된 파일로 작성.
