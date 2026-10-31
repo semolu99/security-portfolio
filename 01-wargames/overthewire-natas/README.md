@@ -17,6 +17,10 @@
 | [3 → 4](./level03-04.md) | robots.txt | `/robots.txt` |
 | [4 → 5](./level04-05.md) | Referer 변조 | `Referer`, `Burp Suite` |
 | [5 → 6](./level05-06.md) | 쿠키 변조 | `Cookie`, `Storage` |
+| [6 → 7](./level06-07.md) | 인클루드 파일 노출 | `includes/secret.inc` |
+| [7 → 8](./level07-08.md) | LFI / Path Traversal | `include()`, `../` |
+| [8 → 9](./level08-09.md) | 인코딩된 시크릿 역변환 | `Base64`, `Hex`, `CyberChef` |
+| [9 → 10](./level09-10.md) | 명령어 인젝션 | `passthru()`, `;` |
 | ... | | |
 
 > 레벨 문서는 풀이 + 보고서로 구성된 파일로 작성.
