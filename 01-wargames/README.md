@@ -4,9 +4,10 @@
 | Name | 주제 | 진행률 |
 |-------|------|-------------|
 | [bandit](./overthewire-bandit) | `Linux` | `██████████` 100% (34/34) |
-| [natas](./overthewire-natas) | `Web` | `██░░░░░░░░` 18% (6/34) |
+| [natas](./overthewire-natas) | `Web` | `███░░░░░░░` 29% (10/34) |
 | [tryhackme](./tryhackme) | `Pentest` | `██████████` 100% (1/1) |
+| [hackthebox](./hackthebox) | `Pentest` | `██████████` 100% (1/1) |
 
 > 진행률은 풀이 문서를 작성한 레벨 기준
-> ⚠️ 모든 내용은 TryHackMe에서 제공하는 합법적인 교육용 랩 환경에서 진행한 학습 기록입니다.
+> ⚠️ 모든 내용은 TryHackMe, HackTheBox에서 제공하는 합법적인 교육용 랩 환경에서 진행한 학습 기록입니다.
 > 실제 서비스나 제3자 시스템에 대한 공격이 아니며, 보안 학습 목적으로만 작성되었습니다.

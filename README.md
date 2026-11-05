@@ -9,6 +9,8 @@
 |--------|------|------|
 | OverTheWire - Bandit | 완료 | [풀이 보기](https://github.com/semolu99/security-portfolio/tree/main/01-wargames/overthewire-bandit) |
 | OverTheWire - Natas | 진행 중 | [풀이 보기](https://github.com/semolu99/security-portfolio/tree/main/01-wargames/overthewire-natas) |
+| TryHackMe | 진행 중 | [풀이 보기](https://github.com/semolu99/security-portfolio/tree/main/01-wargames/tryhackme) |
+| HackTheBox | 진행 중 | [풀이 보기](https://github.com/semolu99/security-portfolio/tree/main/01-wargames/hackthebox) |
 | WeChall | 진행 중 | [프로필 보기](https://www.wechall.net/profile/jien) |
 
 세부 진행률은 [01-wargames/README.md](./01-wargames/README.md)에서 확인할 수 있습니다.
@@ -18,7 +20,9 @@
 security-portfolio/
 ├── 01-wargames/
 │   ├── overthewire-bandit/   # 레벨별 풀이 (목표 · 명령어 · 풀이 과정 · 원리)
-│   └── overthewire-natas/    # 웹 취약점 풀이 + 보고서 (CWE · CVSS · 대응 방안)
+│   ├── overthewire-natas/    # 웹 취약점 풀이 + 보고서 (CWE · CVSS · 대응 방안)
+│   ├── tryhackme/            # 룸별 침투 풀이 + 보고서
+│   └── hackthebox/           # 머신별 침투 풀이 + 보고서
 └── 02-vulnerability-research/
     ├── cve/                  # CVE 사례 분석 (CVE마다 폴더 1개)
     └── cwe/                  # CWE (예정)
