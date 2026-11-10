@@ -21,6 +21,7 @@
 | [7 → 8](./level07-08.md) | LFI / Path Traversal | `include()`, `../` |
 | [8 → 9](./level08-09.md) | 인코딩된 시크릿 역변환 | `Base64`, `Hex`, `CyberChef` |
 | [9 → 10](./level09-10.md) | 명령어 인젝션 | `passthru()`, `;` |
+| [10 → 11](./level10-11.md) | 필터 우회 명령어 인젝션 | `preg_match()`, 백틱 |
 | ... | | |
 
 > 레벨 문서는 풀이 + 보고서로 구성된 파일로 작성.
